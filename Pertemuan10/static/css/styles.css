@@ -1,0 +1,181 @@
+/* =========================================
+   1. CSS VARIABLES (Tema Global)
+========================================= */
+:root {
+  --bg-color: #f4f7f6;
+  --surface-color: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --danger-main: #ef4444;
+  --danger-hover: #dc2626;
+  --border-light: #e2e8f0;
+  
+  /* Modern Soft Shadows */
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+  --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.025);
+  --shadow-hover: 0 20px 25px -5px rgba(0,0,0,0.08), 0 10px 10px -5px rgba(0,0,0,0.04);
+  
+  /* Smooth Transitions (Apple/Modern Web Style) */
+  --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius-md: 12px;
+  --radius-lg: 16px;
+}
+
+/* =========================================
+   2. TYPOGRAPHY & BODY
+========================================= */
+body {
+  background-color: var(--bg-color);
+  /* Modern System Font Stack */
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--text-main);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.5px; /* Sedikit dirapatkan agar terlihat premium */
+}
+
+h5.mb-0 {
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.3px;
+  animation: fadeIn 0.8s var(--transition-smooth);
+}
+
+/* =========================================
+   3. CARDS & CONTAINERS
+========================================= */
+.card {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-lg);
+  background: var(--surface-color);
+  box-shadow: var(--shadow-md);
+  margin-bottom: 24px;
+  
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeSlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.card-header {
+  background-color: transparent;
+  border-bottom: 1px solid var(--border-light);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0 !important;
+  padding: 1rem 1.25rem;
+  animation: slideDown 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* =========================================
+   4. LIST ITEMS (TIMELINE)
+========================================= */
+.list-group-item {
+  border: 1px solid transparent;
+  background-color: var(--surface-color);
+  margin-bottom: 12px;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-smooth);
+  
+  /* Scroll Animation Defaults */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Efek Hover Modern: Mengangkat item dan memperjelas bayangan */
+.list-group-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--border-light);
+  z-index: 1;
+}
+
+.list-group-item:nth-child(odd) { animation-delay: 0.05s; }
+.list-group-item:nth-child(even) { animation-delay: 0.1s; }
+
+/* =========================================
+   5. BUTTONS & INPUTS
+========================================= */
+/* Tombol Delete Modern */
+.btn-danger {
+  background-color: var(--danger-main);
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 0.4rem 1rem;
+  transition: all var(--transition-smooth);
+  box-shadow: 0 4px 6px rgba(239, 68, 68, 0.2); /* Glow merah halus */
+}
+
+.btn-danger:hover {
+  background-color: var(--danger-hover);
+  transform: translateY(-2px); /* Menghilangkan rotasi agar lebih profesional */
+  box-shadow: 0 6px 12px rgba(239, 68, 68, 0.3);
+}
+
+.btn-danger:active {
+  transform: scale(0.96);
+}
+
+/* Input Group Modern */
+.input-group input {
+  border-radius: 10px 0 0 10px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-smooth);
+}
+
+.input-group input:focus {
+  border-color: #3b82f6; /* Warna fokus biru modern */
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15); /* Cincin fokus (focus ring) */
+  outline: none;
+}
+
+.input-group .btn-outline-secondary {
+  border-radius: 0 10px 10px 0;
+  border: 1px solid var(--border-light);
+  border-left: none;
+  background: #f8fafc;
+  font-weight: 500;
+  transition: all var(--transition-smooth);
+}
+
+.input-group .btn-outline-secondary:hover {
+  background-color: var(--text-main);
+  color: var(--surface-color);
+  border-color: var(--text-main);
+}
+
+/* =========================================
+   6. KEYFRAMES ANIMATIONS
+========================================= */
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-15px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}

