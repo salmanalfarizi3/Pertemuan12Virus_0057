@@ -42,4 +42,3 @@ def malicious_function():
     print("This is a malicious code. Be careful!") 
 
     malicious_function()
-# VIRUS SAY BYE
